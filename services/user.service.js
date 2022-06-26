@@ -42,6 +42,27 @@ module.exports = {
     }
   },
 
+  findOneUser : async (req, res) => {
+    User.findById(req.params.id)
+        .then(user => {
+            if (!user) {
+                return res.status(404).send({
+                    message: "User's profile not found with id " + req.params.id
+                });
+            }
+            res.send(user);
+        }).catch(err => {
+            if (err) {
+                return res.status(404).send({
+                    message: "User's profile not found with id " + req.params.id
+                });
+            }
+            return res.status(500).send({
+                message: "Error retrieving user's profile with id " + req.params.id
+            });
+    });
+  },    
+
   forgotPassword: async (data) => {
     const user = await User.findOne({ email: data.email });
     if (user) {

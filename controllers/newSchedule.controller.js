@@ -1,7 +1,5 @@
 const Joi = require('joi');
-const {
-    requestSchedule
-} = require('../services/newSchedule.service');
+const Schedule = require('../models/newSchedule.model');
 
 module.exports = {
   RequestNewSchedule: async (req, res) => {
@@ -16,7 +14,7 @@ module.exports = {
       return;
     }
     const data = validation.value;
-    const result = await requestSchedule(data);
+    const result = await Schedule(data);
     if (result.success) {
       return res.status(200).json({
         success: true,

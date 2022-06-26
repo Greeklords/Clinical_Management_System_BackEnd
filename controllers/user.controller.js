@@ -62,7 +62,7 @@ module.exports = {
     } else {
       return res.status(400).send({ message: result.message });
     }
-  },
+  },  
 
   forgotPassword: async (req, res) => {
     const schema = Joi.object({
